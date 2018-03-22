@@ -1,0 +1,47 @@
+{
+  "version": "0",
+  "id": "b59f9e92-xxxx-yyyy-8ff2-dada52a3895b",
+  "detail-type": "AWS API Call via CloudTrail",
+  "source": "aws.iam",
+  "account": "0123456789012",
+  "time": "2018-03-21T20:06:16Z",
+  "region": "us-east-1",
+  "resources": [],
+  "detail": {
+    "eventVersion": "1.02",
+    "userIdentity": {
+      "type": "AssumedRole",
+      "principalId": "AROAIP2REDACTED76ERTC:john.doe",
+      "arn": "arn:aws:sts::0123456789012:assumed-role/john.doe",
+      "accountId": "0123456789012",
+      "accessKeyId": "ASIAJKREDACTEDOPCWVA",
+      "sessionContext": {
+        "attributes": {
+          "mfaAuthenticated": "true",
+          "creationDate": "2018-03-21T19:57:20Z"
+        },
+        "sessionIssuer": {
+          "type": "Role",
+          "principalId": "AROAIP2REDACTED76ERTC",
+          "arn": "arn:aws:iam::0123456789012:role/john.doe",
+          "accountId": "0123456789012",
+          "userName": "johndoe"
+        }
+      }
+    },
+    "eventTime": "2018-03-21T20:06:16Z",
+    "eventSource": "iam.amazonaws.com",
+    "eventName": "RemoveUserFromGroup",
+    "awsRegion": "us-east-1",
+    "sourceIPAddress": "1.2.3.4",
+    "userAgent": "console.amazonaws.com",
+    "requestParameters": {
+      "groupName": "administrators",
+      "userName": "alice"
+    },
+    "responseElements": null,
+    "requestID": "5004a314-xxxx-yyyy-ae3a-e97f97360ea3",
+    "eventID": "d71ed52a-xxxx-yyyy-acb7-6a552dc03a87",
+    "eventType": "AwsApiCall"
+  }
+}
