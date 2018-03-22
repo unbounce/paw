@@ -1,0 +1,74 @@
+---
+AWSTemplateFormatVersion: "2010-09-09"
+Description: "Provisions infrastructure for github.com/unbounce/paw"
+
+Parameters:
+  IamRoleArn:
+    Type: String
+    Description: "ARN of the IAM for Lambda to use"
+  SlackWebhookUrl:
+    Type: "AWS::SSM::Parameter::Value<String>"
+    Description: "URL for the project's incoming webhook"
+    Default: "/paw/slack/incoming-webhook/url"
+    NoEcho: true
+  SlackChannels:
+    Type: CommaDelimitedList
+    Description: "Comma-delimited list of Slack channels to notify"
+    Default: "#security-alerts"
+
+Resources:
+  EventRule:
+    Type: "AWS::Events::Rule"
+    Properties:
+      Description: "Watches for membership changes to privileged groups"
+      State: ENABLED
+      EventPattern:
+        source:
+          - "aws.iam"
+        detail-type:
+          - "AWS API Call via CloudTrail"
+        detail:
+          eventSource:
+            - "iam.amazonaws.com"
+          eventName:
+            - "AddUserToGroup"
+            - "RemoveUserFromGroup"
+      Targets:
+        - Id: !Ref LambdaFn
+          Arn: !GetAtt LambdaFn.Arn
+  LambdaPermission:
+    Type: "AWS::Lambda::Permission"
+    Properties:
+      Action: "lambda:InvokeFunction"
+      FunctionName: !GetAtt LambdaFn.Arn
+      Principal: "events.amazonaws.com"
+      SourceArn: !GetAtt EventRule.Arn
+  LambdaFn:
+    Type: "AWS::Lambda::Function"
+    Properties:
+      Code:
+        ZipFile: !Sub |
+          def lambda_handler(event, context):
+            print("Initial Lambda Python stub.")
+            print("Replace with real deployment package.")
+      Description: "Notifies Slack of privileged group membership changes"
+      Handler: "index.lambda_handler"
+      Role: !Ref IamRoleArn
+      MemorySize: 128   # MB
+      Runtime: "python3.6"
+      Timeout: 60   # seconds
+      Environment:
+        Variables:
+          SLACK_WEBHOOK_URL: !Ref SlackWebhookUrl
+          SLACK_CHANNELS:
+            Fn::Join:
+              - ","
+              - !Ref SlackChannels
+
+Outputs:
+  LambdaFunctionArn:
+    Value: !GetAtt LambdaFn.Arn
+    Description: "ARN of the Lambda function that notifies Slack"
+    Export:
+      Name: "paw:lambda:function:arn"
+

@@ -1,0 +1,40 @@
+---
+AWSTemplateFormatVersion: "2010-09-09"
+Description: "Provisions IAM resources for PAW"
+
+Resources:
+  IamRole:
+    Type: "AWS::IAM::Role"
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: "lambda.amazonaws.com"
+            Action: "sts:AssumeRole"
+      Path: "/lambda/"
+  AllowLambdaCloudwatchLogsPolicy:
+    Type: "AWS::IAM::Policy"
+    Properties:
+      PolicyName: "rw-cloudwatch-logs"
+      PolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: "Allow"
+            Action:
+              - "logs:CreateLogStream"
+              - "logs:CreateLogGroup"
+              - "logs:PutLogEvents"
+            Resource:
+              - !Sub "arn:aws:logs:*:${AWS::AccountId}:*"
+      Roles:
+        - !Ref IamRole
+
+Outputs:
+  IamRoleArn:
+    Value: !GetAtt IamRole.Arn
+    Description: "ARN of the IAM role used by the project Lambda function"
+    Export:
+      Name: "paw:iam:role:arn"
+ 
