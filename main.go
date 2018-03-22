@@ -9,6 +9,8 @@ import (
 	"strings"
 )
 
+var VERSION string
+
 func parseSlackChannels(channels string) []string {
 	list := []string{}
 
@@ -29,6 +31,7 @@ func parseSlackChannels(channels string) []string {
 }
 
 func Handler(ctx context.Context, event events.CloudWatchEvent) {
+	fmt.Printf("App Version: %s\n", VERSION)
 	detail := processEventDetail(event)
 	fmt.Printf("Event Detail: %v\n", detail)
 

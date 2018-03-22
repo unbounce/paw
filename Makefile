@@ -3,6 +3,8 @@
 
 pwd := $(shell pwd)
 
+git_hash := $(shell git rev-parse --short head)
+
 project.name := paw
 project.repo := github.com/unbounce/$(project.name)
 
@@ -28,7 +30,7 @@ help: ## Shows this message
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 
 build: ## Compiles the code for the Linux target (AWS Lambda)
-	GOOS=linux GOARCH=amd64 go build -o $(build.file) $(project.repo)
+	GOOS=linux GOARCH=amd64 go build -ldflags "-X main.VERSION=$(git_hash)" -o $(build.file) $(project.repo)
 
 test: ## Runs tests locally
 	go test $(project.repo)
