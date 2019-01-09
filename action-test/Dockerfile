@@ -13,7 +13,7 @@ LABEL "repository"="http://github.com/unbounce/paw"
 LABEL "homepage"="http://github.com/unbounce/paw"
 LABEL "maintainer"="UnbounceRabbit <unbouncerabbit@github.com>"
 
-RUN export PATH=$PATH:/github/workspace/scanner/bin
+RUN export PATH=$PATH:/github/workspace/sonar-scanner/bin
 
 ADD entrypoint.sh /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
