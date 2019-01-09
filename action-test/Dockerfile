@@ -1,11 +1,8 @@
 FROM golang
 
-ARG ACCESS_KEY
-ARG BRANCH
-
 WORKDIR /github/workspace
 
-ADD ./sonar-scanner /github/workspace/sonar-scanner
+ADD . /github/workspace/sonar-scanner
 
 LABEL "com.github.actions.name"="Scan Test"
 LABEL "com.github.actions.description"="Running scan test"
