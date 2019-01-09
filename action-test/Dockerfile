@@ -1,4 +1,4 @@
-FROM debian:9.5-slim
+FROM golang
 
 LABEL "com.github.actions.name"="Scan Test"
 LABEL "com.github.actions.description"="Running scan test"
