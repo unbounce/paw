@@ -1,8 +1,8 @@
 FROM golang
 
-WORKDIR /github/workspace/sonar-scanner
+ADD ./sonar /github/workspace/
+WORKDIR /github/workspace/sonar
 
-ADD ./sonar /github/workspace/sonar-scanner
 
 LABEL "com.github.actions.name"="Scan Test"
 LABEL "com.github.actions.description"="Running scan test"
