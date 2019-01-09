@@ -1,3 +1,3 @@
 #!/bin/sh
 
-sh -c "docker $*"
+sh -c "pwd "
