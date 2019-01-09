@@ -1,3 +1,3 @@
 #!/bin/sh
 
-sh -c "sonar-scanner"
+sh -c "ls"

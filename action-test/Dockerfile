@@ -1,8 +1,8 @@
 FROM golang
 
-WORKDIR /github/workspace
+WORKDIR /github/workspace/sonar-scanner
 
-ADD . /github/workspace/sonar-scanner
+ADD ./sonar /github/workspace/sonar-scanner
 
 LABEL "com.github.actions.name"="Scan Test"
 LABEL "com.github.actions.description"="Running scan test"
@@ -13,7 +13,6 @@ LABEL "repository"="http://github.com/unbounce/paw"
 LABEL "homepage"="http://github.com/unbounce/paw"
 LABEL "maintainer"="UnbounceRabbit <unbouncerabbit@github.com>"
 
-RUN export PATH=$PATH:/github/workspace/sonar-scanner/bin
-
+EXPOSE 8080
 ADD entrypoint.sh /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
