@@ -1,7 +1,6 @@
 FROM golang
 
 ADD ./sonar /github/workspace/sonar
-ADD ../ /github/workspace/code
 WORKDIR /github/workspace/
 
 

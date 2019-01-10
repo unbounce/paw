@@ -5,3 +5,13 @@ go:
 branches:
   only:
   - develop
+
+# addons:
+#   sonarcloud:
+#     organization: "unbouncerabbit-github" # the key of the org you chose at step #3
+#     token:
+#       secure:
+
+# script:
+#   # other script steps might be done before running the actual analysis
+#   - sonar-scanner
