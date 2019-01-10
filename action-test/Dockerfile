@@ -14,5 +14,5 @@ LABEL "homepage"="http://github.com/unbounce/paw"
 LABEL "maintainer"="UnbounceRabbit <unbouncerabbit@github.com>"
 
 EXPOSE 8080
-ADD entrypoint.sh /entrypoint.sh
-ENTRYPOINT ["/entrypoint.sh"]
+RUN ls && ./github/workspace/sonar/bin/sonar-scanner
+
