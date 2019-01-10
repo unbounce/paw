@@ -14,5 +14,6 @@ LABEL "homepage"="http://github.com/unbounce/paw"
 LABEL "maintainer"="UnbounceRabbit <unbouncerabbit@github.com>"
 
 EXPOSE 8080
-RUN ./sonar/bin/sonar-scanner --version
+RUN pwd
+RUN ls
 
