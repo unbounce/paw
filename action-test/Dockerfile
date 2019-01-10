@@ -1,4 +1,4 @@
-FROM java:openjdk-8-alpine
+FROM java:openjdk-8-jre-alpine
 
 ADD ./sonar /github/workspace/sonar
 WORKDIR /github/workspace/
@@ -14,5 +14,12 @@ LABEL "homepage"="http://github.com/unbounce/paw"
 LABEL "maintainer"="UnbounceRabbit <unbouncerabbit@github.com>"
 
 EXPOSE 8080
-RUN echo $(pwd)
-RUN cd sonar/bin/ && chmod +x ./sonar-scanner && ./sonar-scanner --version
+RUN cd sonar/bin/ && chmod +x ./sonar-scanner
+RUN ./sonar-scanner \
+    -Dsonar.projectKey=sast-test \
+    -Dsonar.organization=unbouncerabbit-github \
+    -Dsonar.sources=. \
+    -Dsonar.host.url=https://sonarcloud.io \
+    -Dsonar.login=$SONAR_LOGIN  \
+    -Dsonar.branch.name=develop
+
