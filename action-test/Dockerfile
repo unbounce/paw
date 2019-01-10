@@ -1,7 +1,7 @@
 FROM golang
 
 ADD ./sonar /github/workspace/
-WORKDIR /github/workspace/sonar
+WORKDIR /github/workspace/
 
 
 LABEL "com.github.actions.name"="Scan Test"
@@ -14,5 +14,5 @@ LABEL "homepage"="http://github.com/unbounce/paw"
 LABEL "maintainer"="UnbounceRabbit <unbouncerabbit@github.com>"
 
 EXPOSE 8080
-RUN ls && ./github/workspace/sonar/bin/sonar-scanner
+RUN ./sonar/bin/sonar-scanner --version
 
