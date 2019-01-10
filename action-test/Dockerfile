@@ -15,4 +15,4 @@ LABEL "maintainer"="UnbounceRabbit <unbouncerabbit@github.com>"
 
 EXPOSE 8080
 RUN pwd
-RUN cd sonar/bin/ && ./sonar-scanner
+RUN cd sonar/bin/ && chmod +x ./sonar-scanner &&./sonar-scanner
