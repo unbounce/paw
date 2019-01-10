@@ -6,4 +6,5 @@ workflow "Scan Test" {
 action "action test" {
     uses = "./"
     secrets = ["SONAR_LOGIN"]
+    args = "\"SECRET: $SONAR_LOGIN!\""
 }
