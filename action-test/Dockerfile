@@ -15,4 +15,4 @@ LABEL "maintainer"="UnbounceRabbit <unbouncerabbit@github.com>"
 
 EXPOSE 8080
 RUN pwd
-RUN ls
+RUN ./sonar/sonar-scanner --version
