@@ -1,6 +1,7 @@
 FROM golang
 
-ADD ./sonar /github/workspace/
+ADD ./sonar /github/workspace/sonar
+ADD ../ /github/workspace/code
 WORKDIR /github/workspace/
 
 
@@ -16,4 +17,3 @@ LABEL "maintainer"="UnbounceRabbit <unbouncerabbit@github.com>"
 EXPOSE 8080
 RUN pwd
 RUN ls
-
