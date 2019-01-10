@@ -15,11 +15,4 @@ LABEL "maintainer"="UnbounceRabbit <unbouncerabbit@github.com>"
 
 EXPOSE 8080
 RUN cd sonar/bin/ && chmod +x ./sonar-scanner
-RUN ./sonar-scanner \
-    -Dsonar.projectKey=sast-test \
-    -Dsonar.organization=unbouncerabbit-github \
-    -Dsonar.sources=. \
-    -Dsonar.host.url=https://sonarcloud.io \
-    -Dsonar.login=$SONAR_LOGIN  \
-    -Dsonar.branch.name=develop
-
+ENTRYPOINT [ "sonar-scanner" ]
