@@ -12,4 +12,6 @@ COPY ./ .
 RUN unzip ./sonar-scanner-cli-3.2.0.1227-linux.zip
 RUN ./sonar-scanner-3.2.0.1227-linux/bin/sonar-scanner --version
 
-RUN ./sonar-scanner-3.2.0.1227-linux/bin/sonar-scanner -Dsonar.projectKey=sast-test -Dsonar.organization=unbouncerabbit-github -Dsonar.sources=. -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=$(SONAR_LOGIN) -Dsonar.branch.name=develop
+RUN env
+
+RUN ./sonar-scanner-3.2.0.1227-linux/bin/sonar-scanner -Dsonar.projectKey=sast-test -Dsonar.organization=unbouncerabbit-github -Dsonar.sources=. -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=${SONAR_LOGIN} -Dsonar.branch.name=github
