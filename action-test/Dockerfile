@@ -1,4 +1,4 @@
-FROM golang
+FROM java:openjdk-8-alpine
 
 ADD ./sonar /github/workspace/sonar
 WORKDIR /github/workspace/
