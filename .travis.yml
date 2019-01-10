@@ -10,7 +10,7 @@ branches:
 #   sonarcloud:
 #     organization: "unbouncerabbit-github" # the key of the org you chose at step #3
 #     token:
-#       secure:
+#       secure: ${SONAR_TOKEN}
 
 # script:
 #   # other script steps might be done before running the actual analysis
