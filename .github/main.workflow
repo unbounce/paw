@@ -4,6 +4,6 @@ workflow "Scan Test" {
 }
 
 action "action test" {
-    uses = "./action-test/"
+    uses = "./"
     secrets = ["SONAR_LOGIN"]
 }
