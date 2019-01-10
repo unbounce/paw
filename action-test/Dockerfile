@@ -4,6 +4,6 @@ ADD ./sonar /github/workspace/sonar
 WORKDIR /github/workspace/
 
 
-RUN chmod +x .sonar/bin/sonar-scanner
-RUN echo $(ls)
+RUN chmod +x ./sonar/bin/sonar-scanner
+ENTRYPOINT [ "entrypoint.sh" ]
 
