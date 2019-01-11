@@ -1,9 +1,9 @@
 workflow "Scan Test" {
     on = "push"
-    resolves = ["action test"]
+    resolves = ["sonar test"]
 }
 
-action "action test" {
+action "sonar test" {
     uses = "./"
     secrets = ["SONAR_LOGIN"]
     args = "\"SECRET: $SONAR_LOGIN!\""
