@@ -5,9 +5,6 @@ WORKDIR /github/workspace/
 #download zip
 ADD https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-3.2.0.1227-linux.zip /github/workspace/
 
-#copy all files into workdir
-COPY ./ .
-
 #extract all files
 RUN unzip ./sonar-scanner-cli-3.2.0.1227-linux.zip
 
