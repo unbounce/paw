@@ -1,0 +1,8 @@
+organization=unbouncerabbit-github
+projectKey=unbounce-paw
+serverUrl=https://sonarcloud.io
+serverVersion=7.6.0.21127
+branch=github
+dashboardUrl=https://sonarcloud.io/dashboard?id=unbounce-paw&branch=github&resolved=false
+ceTaskId=AWhNbeHHVNr3bdSnvEsD
+ceTaskUrl=https://sonarcloud.io/api/ce/task?id=AWhNbeHHVNr3bdSnvEsD
