@@ -1,4 +1,4 @@
-FROM openjdk:8-jre-alpine
+FROM openjdk
 
 WORKDIR /github/workspace/
 
@@ -10,8 +10,5 @@ COPY ./ .
 
 #extract all files
 RUN unzip ./sonar-scanner-cli-3.2.0.1227-linux.zip
-RUN ./sonar-scanner-3.2.0.1227-linux/bin/sonar-scanner --version
 
-RUN env
-
-RUN ./sonar-scanner-3.2.0.1227-linux/bin/sonar-scanner -Dsonar.projectKey=unbounce-paw -Dsonar.organization=unbouncerabbit-github -Dsonar.sources=. -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=${SONAR_LOGIN} -Dsonar.branch.name=github -X
+CMD ./sonar-scanner-3.2.0.1227-linux/bin/sonar-scanner -Dsonar.projectKey=unbounce-paw -Dsonar.organization=unbouncerabbit-github -Dsonar.sources=. -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=${SONAR_LOGIN} -Dsonar.branch.name=github -X
