@@ -16,3 +16,5 @@ CMD /tmp/sonar/sonar-scanner-3.2.0.1227-linux/bin/sonar-scanner \
     -Dsonar.login=$SONAR_LOGIN \
     -Dsonar.branch.name=github \
     -X
+
+RUN ls
