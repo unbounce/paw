@@ -1,4 +1,4 @@
-FROM openjdk
+FROM 8-jre-alpine
 
 WORKDIR /github/workspace/
 
