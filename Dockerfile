@@ -1,4 +1,4 @@
-# FROM openjdk
+FROM openjdk
 
 # WORKDIR /github/workspace/
 
@@ -18,7 +18,7 @@
 #     -X
 
 # RUN ls
-FROM ubuntu:18.04
+#FROM ubuntu:18.04
 
 WORKDIR /github/workspace
 
@@ -26,7 +26,7 @@ ENV SONAR_DOWNLOAD_USER=https://binaries.sonarsource.com/Distribution/sonar-scan
 ENV SONAR_PROJECT_KEY=unbounce-paw
 ENV SONAR_ORG=unbouncerabbit-github
 
-RUN apt-get update -qq && apt-get install unzip -y
+#RUN apt-get update -qq && apt-get install unzip -y
 
 #ADD $SONAR_DOWNLOAD_URL /tmp/scanner.zip
 ADD https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-3.2.0.1227-linux.zip /tmp/scanner.zip
