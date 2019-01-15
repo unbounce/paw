@@ -1,4 +1,4 @@
-FROM ubuntu:18.04
+FROM bitnami/minideb:jessie
 
 WORKDIR /github/workspace/
 
@@ -8,6 +8,8 @@ ADD https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanne
 RUN apt-get update -qq && apt-get install unzip -y
 
 RUN mkdir -p /tmp/sonar && unzip /tmp/scanner.zip -d /tmp/sonar
+
+RUN rm /tmp/scanner.zip
 
 CMD /tmp/sonar/sonar-scanner-3.2.0.1227-linux/bin/sonar-scanner \
     -Dsonar.projectKey=unbounce-paw \
