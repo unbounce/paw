@@ -4,6 +4,6 @@ workflow "Sonar Scanner" {
 }
 
 action "sonar scan" {
-    uses = "docker:/unbounce/sonarcloud-github"
+    uses = "docker://unbounce/sonarcloud-github"
     secrets = ["SONAR_LOGIN"]
 }
