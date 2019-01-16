@@ -1,9 +1,9 @@
-workflow "Scan Test" {
+workflow "Sonar Scanner" {
     on = "push"
-    resolves = ["sonar test"]
+    resolves = ["sonar scan"]
 }
 
-action "sonar test" {
-    uses = "./"
+action "sonar scan" {
+    uses = "docker:/unbounce/sonarcloud-github"
     secrets = ["SONAR_LOGIN"]
 }
