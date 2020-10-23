@@ -114,7 +114,7 @@ func TestCreateNotifyMessage(t *testing.T) {
 	actual := createNotifyMessage(detail)
 
 	expected := SlackMessage{
-		Message: fmt.Sprintf(ADD_USER_SLACK_MSG, "alice", "administrators", "arn:aws:sts::0123456789012:assumed-role/johndoe/john.doe", "1.2.3.4"),
+		Message: fmt.Sprintf(ADD_USER_SLACK_MSG, "<https://console.aws.amazon.com/iam/home?region=us-east-1#/users/alice|alice>", "<https://console.aws.amazon.com/iam/home?region=us-east-1#/groups/administrators|administrators>", "arn:aws:sts::0123456789012:assumed-role/johndoe/john.doe", "1.2.3.4"),
 		UserName: DEFAULT_USERNAME,
 		IconEmoji: DEFAULT_EMOJI,
 	}

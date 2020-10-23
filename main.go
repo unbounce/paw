@@ -85,10 +85,23 @@ func createNotifyMessage(detail EventDetail) SlackMessage {
 	}
 
 	msg := SlackMessage{
-		Message:   fmt.Sprintf(fmtString, detail.RequestParameters.UserName, detail.RequestParameters.GroupName, detail.UserIdentity.Arn, detail.SourceIPAddress),
+		Message:   fmt.Sprintf(
+			fmtString,
+			convertToLink(detail.RequestParameters.UserName, USER_BASE_URL),
+			convertToLink(detail.RequestParameters.GroupName, GROUP_BASE_URL),
+			detail.UserIdentity.Arn,
+			detail.SourceIPAddress,
+		),
 		UserName:  DEFAULT_USERNAME,
 		IconEmoji: DEFAULT_EMOJI,
 	}
 
 	return msg
+}
+
+func convertToLink(iamResource string, linkType string) string {
+	var link string
+	link = fmt.Sprintf("<%s%s|%s>", linkType, iamResource, iamResource)
+
+	return link
 }

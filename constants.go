@@ -7,10 +7,13 @@ const (
 
 	EVENT_ADD_USER    string = "AddUserToGroup"
 	EVENT_REMOVE_USER string = "RemoveUserFromGroup"
+	GROUP_BASE_URL  string = "https://console.aws.amazon.com/iam/home?region=us-east-1#/groups/"
+	ROLE_BASE_URL   string = "https://console.aws.amazon.com/iam/home?region=us-east-1#/roles/"
+	USER_BASE_URL   string = "https://console.aws.amazon.com/iam/home?region=us-east-1#/users/"
 
-	ADD_USER_SLACK_MSG    string = ":red-light: User %s was added to group %s (Arn: %s IP: %s)"
-	REMOVE_USER_SLACK_MSG string = ":green-light: User %s was removed from group %s (Arn: %s IP: %s)"
-	ERROR_SLACK_MSG string = ":x: IAM update failure: %s (IP: %s)"
+	ADD_USER_SLACK_MSG    string = ":red-light: User %s was added to group %s (*Arn:* %s *IP:* %s)"
+	REMOVE_USER_SLACK_MSG string = ":green-light: User %s was removed from group %s (*Arn:* %s *IP:* %s)"
+	ERROR_SLACK_MSG string = ":x: IAM update failure: %s (*IP:* %s)"
 
 	DEFAULT_EMOJI    string = ":aws:"
 	DEFAULT_USERNAME string = "Escalated Privileges Watcher"
