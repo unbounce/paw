@@ -8,8 +8,9 @@ const (
 	EVENT_ADD_USER    string = "AddUserToGroup"
 	EVENT_REMOVE_USER string = "RemoveUserFromGroup"
 
-	ADD_USER_SLACK_MSG    string = ":red-light: User %s was added to group %s (IP: %s)"
-	REMOVE_USER_SLACK_MSG string = ":green-light: User %s was removed from group %s (IP: %s)"
+	ADD_USER_SLACK_MSG    string = ":red-light: User %s was added to group %s (Arn: %s IP: %s)"
+	REMOVE_USER_SLACK_MSG string = ":green-light: User %s was removed from group %s (Arn: %s IP: %s)"
+	ERROR_SLACK_MSG string = ":x: IAM update failure: %s (IP: %s)"
 
 	DEFAULT_EMOJI    string = ":aws:"
 	DEFAULT_USERNAME string = "Escalated Privileges Watcher"
