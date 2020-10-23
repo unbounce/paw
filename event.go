@@ -7,6 +7,7 @@ import (
 
 type UserIdentity struct {
 	SessionContext SessionContext `json:"sessionContext"`
+	Arn            string         `json:"arn"`
 }
 
 type SessionContext struct {
@@ -27,6 +28,8 @@ type EventDetail struct {
 	EventName         string            `json:"eventName"`
 	RequestParameters RequestParameters `json:"requestParameters"`
 	SourceIPAddress   string            `json:"sourceIPAddress"`
+	ErrorMessage      string            `json:"errorMessage"`
+	ErrorCode         string            `json:"errorCode"`
 }
 
 func processEventDetail(event events.CloudWatchEvent) EventDetail {

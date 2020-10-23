@@ -42,21 +42,12 @@ func Handler(ctx context.Context, event events.CloudWatchEvent) {
 	}
 	fmt.Printf("Slack channels to notify: %v\n", channels)
 
-	var fmtString string
-	switch detail.EventName {
-	case EVENT_ADD_USER:
-		fmtString = ADD_USER_SLACK_MSG
-	case EVENT_REMOVE_USER:
-		fmtString = REMOVE_USER_SLACK_MSG
-	default:
-		fmt.Printf("Unsupported event received: %s\n", detail.EventName)
-		return
-	}
+	var msg SlackMessage
 
-	msg := SlackMessage{
-		Message:   fmt.Sprintf(fmtString, detail.RequestParameters.UserName, detail.RequestParameters.GroupName, detail.SourceIPAddress),
-		UserName:  DEFAULT_USERNAME,
-		IconEmoji: DEFAULT_EMOJI,
+	if (detail.ErrorMessage != "") {
+		msg = createErrorMessage(detail)
+	} else {
+		msg = createNotifyMessage(detail)
 	}
 
 	var url strings.Builder
@@ -69,4 +60,48 @@ func Handler(ctx context.Context, event events.CloudWatchEvent) {
 
 func main() {
 	lambda.Start(Handler)
+}
+
+
+func createErrorMessage(detail EventDetail) SlackMessage {
+	msg := SlackMessage{
+		Message:   fmt.Sprintf(ERROR_SLACK_MSG, detail.ErrorMessage, detail.SourceIPAddress),
+		UserName:  DEFAULT_USERNAME,
+		IconEmoji: DEFAULT_EMOJI,
+	}
+
+	return msg
+}
+
+func createNotifyMessage(detail EventDetail) SlackMessage {
+	var fmtString string
+	switch detail.EventName {
+	case EVENT_ADD_USER:
+		fmtString = ADD_USER_SLACK_MSG
+	case EVENT_REMOVE_USER:
+		fmtString = REMOVE_USER_SLACK_MSG
+	default:
+		fmt.Printf("Unsupported event received: %s\n", detail.EventName)
+	}
+
+	msg := SlackMessage{
+		Message:   fmt.Sprintf(
+			fmtString,
+			convertToLink(detail.RequestParameters.UserName, USER_BASE_URL),
+			convertToLink(detail.RequestParameters.GroupName, GROUP_BASE_URL),
+			detail.UserIdentity.Arn,
+			detail.SourceIPAddress,
+		),
+		UserName:  DEFAULT_USERNAME,
+		IconEmoji: DEFAULT_EMOJI,
+	}
+
+	return msg
+}
+
+func convertToLink(iamResource string, linkType string) string {
+	var link string
+	link = fmt.Sprintf("<%s%s|%s>", linkType, iamResource, iamResource)
+
+	return link
 }
