@@ -1,5 +1,8 @@
 # PAW: Privileged Access Watcher
 
+![SonarCloud.io](https://sonarcloud.io/api/project_badges/measure?project=paw&metric=alert_status)
+
+
 This goal of this project is to watch privileged IAM groups in AWS
 for membership additions and deletions, then notify a specific Slack
 channel for visibility and notification to the affected person.
