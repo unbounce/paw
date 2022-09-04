@@ -9,9 +9,9 @@ func TestProcessEventDetail(t *testing.T) {
 	t.Parallel()
 
 	cases := []struct {
-		Name        string
-		Payload     string
-		Expected    EventDetail
+		Name     string
+		Payload  string
+		Expected EventDetail
 	}{
 		{
 			"case1",
@@ -58,13 +58,13 @@ func TestProcessEventDetail(t *testing.T) {
 						SessionIssuer: SessionIssuer{
 							UserName: "johndoe",
 						},
-				 	},
+					},
 					Arn: "arn:aws:sts::0123456789012:assumed-role/johndoe/john.doe",
 				},
 				EventName: "AddUserToGroup",
 				RequestParameters: RequestParameters{
 					GroupName: "administrators",
-					UserName: "alice",
+					UserName:  "alice",
 				},
 				SourceIPAddress: "1.2.3.4",
 			},
@@ -106,19 +106,19 @@ func TestProcessEventDetail(t *testing.T) {
 			}`,
 			EventDetail{
 				ErrorMessage: "User: arn:aws:iam::002682819933:user/warren.wegner is not authorized to perform: iam:RemoveUserFromGroup on resource: group iam-group-content-tribe-Group-VCVVSEI39MNZ",
-				ErrorCode: "AccessDenied",
+				ErrorCode:    "AccessDenied",
 				UserIdentity: UserIdentity{
 					SessionContext: SessionContext{
 						SessionIssuer: SessionIssuer{
 							UserName: "",
 						},
-				 	},
+					},
 					Arn: "arn:aws:iam::002682819933:user/warren.wegner",
 				},
 				EventName: "RemoveUserFromGroup",
 				RequestParameters: RequestParameters{
 					GroupName: "",
-					UserName: "",
+					UserName:  "",
 				},
 				SourceIPAddress: "1.2.3.4",
 			},

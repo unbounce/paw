@@ -44,7 +44,7 @@ func Handler(ctx context.Context, event events.CloudWatchEvent) {
 
 	var msg SlackMessage
 
-	if (detail.ErrorMessage != "") {
+	if detail.ErrorMessage != "" {
 		msg = createErrorMessage(detail)
 	} else {
 		msg = createNotifyMessage(detail)
@@ -61,7 +61,6 @@ func Handler(ctx context.Context, event events.CloudWatchEvent) {
 func main() {
 	lambda.Start(Handler)
 }
-
 
 func createErrorMessage(detail EventDetail) SlackMessage {
 	msg := SlackMessage{
@@ -85,7 +84,7 @@ func createNotifyMessage(detail EventDetail) SlackMessage {
 	}
 
 	msg := SlackMessage{
-		Message:   fmt.Sprintf(
+		Message: fmt.Sprintf(
 			fmtString,
 			convertToLink(detail.RequestParameters.UserName, USER_BASE_URL),
 			convertToLink(detail.RequestParameters.GroupName, GROUP_BASE_URL),
