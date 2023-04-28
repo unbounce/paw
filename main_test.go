@@ -1,8 +1,8 @@
 package main
 
 import (
-	"testing"
 	"fmt"
+	"testing"
 )
 
 func TestParseSlackChannels(t *testing.T) {
@@ -62,19 +62,19 @@ func stringSliceEq(a, b []string) bool {
 func TestCreateErrorMessage(t *testing.T) {
 	detail := EventDetail{
 		ErrorMessage: "User: arn:aws:iam::002682819933:user/warren.wegner is not authorized to perform: iam:RemoveUserFromGroup on resource: group iam-group-content-tribe-Group-VCVVSEI39MNZ",
-		ErrorCode: "AccessDenied",
+		ErrorCode:    "AccessDenied",
 		UserIdentity: UserIdentity{
 			SessionContext: SessionContext{
 				SessionIssuer: SessionIssuer{
 					UserName: "",
 				},
-				},
+			},
 			Arn: "arn:aws:iam::002682819933:user/warren.wegner",
 		},
 		EventName: "RemoveUserFromGroup",
 		RequestParameters: RequestParameters{
 			GroupName: "",
-			UserName: "",
+			UserName:  "",
 		},
 		SourceIPAddress: "1.2.3.4",
 	}
@@ -82,12 +82,12 @@ func TestCreateErrorMessage(t *testing.T) {
 	actual := createErrorMessage(detail)
 
 	expected := SlackMessage{
-		Message: fmt.Sprintf(ERROR_SLACK_MSG, "User: arn:aws:iam::002682819933:user/warren.wegner is not authorized to perform: iam:RemoveUserFromGroup on resource: group iam-group-content-tribe-Group-VCVVSEI39MNZ", "1.2.3.4"),
-		UserName: DEFAULT_USERNAME,
+		Message:   fmt.Sprintf(ERROR_SLACK_MSG, "User: arn:aws:iam::002682819933:user/warren.wegner is not authorized to perform: iam:RemoveUserFromGroup on resource: group iam-group-content-tribe-Group-VCVVSEI39MNZ", "1.2.3.4"),
+		UserName:  DEFAULT_USERNAME,
 		IconEmoji: DEFAULT_EMOJI,
 	}
 
-	if (actual != expected) {
+	if actual != expected {
 		t.Errorf("[CreateErrorMessage] Expected %v but go t%v", expected, actual)
 	}
 
@@ -100,13 +100,13 @@ func TestCreateNotifyMessage(t *testing.T) {
 				SessionIssuer: SessionIssuer{
 					UserName: "johndoe",
 				},
-			 },
+			},
 			Arn: "arn:aws:sts::0123456789012:assumed-role/johndoe/john.doe",
 		},
 		EventName: "AddUserToGroup",
 		RequestParameters: RequestParameters{
 			GroupName: "administrators",
-			UserName: "alice",
+			UserName:  "alice",
 		},
 		SourceIPAddress: "1.2.3.4",
 	}
@@ -114,12 +114,12 @@ func TestCreateNotifyMessage(t *testing.T) {
 	actual := createNotifyMessage(detail)
 
 	expected := SlackMessage{
-		Message: fmt.Sprintf(ADD_USER_SLACK_MSG, "<https://console.aws.amazon.com/iam/home?region=us-east-1#/users/alice|alice>", "<https://console.aws.amazon.com/iam/home?region=us-east-1#/groups/administrators|administrators>", "arn:aws:sts::0123456789012:assumed-role/johndoe/john.doe", "1.2.3.4"),
-		UserName: DEFAULT_USERNAME,
+		Message:   fmt.Sprintf(ADD_USER_SLACK_MSG, "<https://console.aws.amazon.com/iam/home?region=us-east-1#/users/alice|alice>", "<https://console.aws.amazon.com/iam/home?region=us-east-1#/groups/administrators|administrators>", "arn:aws:sts::0123456789012:assumed-role/johndoe/john.doe", "1.2.3.4"),
+		UserName:  DEFAULT_USERNAME,
 		IconEmoji: DEFAULT_EMOJI,
 	}
 
-	if (actual != expected) {
+	if actual != expected {
 		t.Errorf("[CreateNotifyMessage] Expected %v but go t%v", expected, actual)
 	}
 }
