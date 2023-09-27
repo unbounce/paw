@@ -55,7 +55,7 @@ Resources:
       Handler: "index.lambda_handler"
       Role: !Ref IamRoleArn
       MemorySize: 128   # MB
-      Runtime: "python3.6"
+      Runtime: "go1.x"
       Timeout: 60   # seconds
       Environment:
         Variables:
@@ -71,4 +71,3 @@ Outputs:
     Description: "ARN of the Lambda function that notifies Slack"
     Export:
       Name: "paw:lambda:function:arn"
-
